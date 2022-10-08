@@ -2,7 +2,7 @@ import pyautogui
 import pydirectinput
 from time import sleep
 
-ok=1
+ok=0
 
 DELAY_BETWEEN_COMMANDS = 1.00
 
@@ -18,7 +18,6 @@ def main():
 def initializePyAutoGUI():
     # Initialized PyAutoGUI
     # https://pyautogui.readthedocs.io/en/latest/introduction.html
-    # When fail-safe mode is True, moving the mouse to the upper-left corner will abort your program.
     pyautogui.FAILSAFE = True
 
 
@@ -44,28 +43,23 @@ def reportMousePosition(seconds=10):
         
 def cautapeecran(seconds=50):
     for i in range(0, seconds):
-        if(pyautogui.locateOnScreen('tre.png',confidence=.6)):
-            ok=1
-        else:
-            ok=0
-        if(ok==1):
+        if(pyautogui.locateOnScreen('tre.png',confidence=.5)):
+           while(pyautogui.locateOnScreen('tre.png',confidence=.5)):
             miscalamijloc()
-        if(ok==1):
             miscabarastanga()
-        if(ok==1):
             miscabaradreapta()
-        if(ok==0):
-            sleep(DELAY_BETWEEN_COMMANDS)
+        else:
             pydirectinput.keyDown('1')
+            sleep(DELAY_BETWEEN_COMMANDS)
+            
             
 
 def miscalamijloc():
-        pyautogui.click(x=953 ,y=671,duration=0.2)
+        pyautogui.click(x=953 ,y=671)
 def miscabarastanga():
-        pyautogui.dragTo(825 , 666,duration=0.2)
+        pyautogui.dragTo(825 , 666,duration=0.1)
 def miscabaradreapta():
-        pyautogui.dragTo(1094 , 670,duration=0.3)
-        
+        pyautogui.dragTo(1094 , 670,duration=0.1)
 
 
 if __name__ == "__main__":
